@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,11 +21,11 @@
 
 DROP TABLE IF EXISTS `acts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+SET character_set_client = utf8mb4 ;
 CREATE TABLE `acts` (
-  `act_name` varchar(47) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `act_id` int(11) NOT NULL,
-  PRIMARY KEY (`act_id`)
+                        `act_name` varchar(47) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                        `act_id` int(11) NOT NULL,
+                        PRIMARY KEY (`act_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -272,14 +272,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+SET character_set_client = utf8mb4 ;
 CREATE TABLE `state` (
-  `state_id` int(11) NOT NULL,
-  `state_name` varchar(22) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `country_id` int(11) NOT NULL,
-  PRIMARY KEY (`state_id`),
-  KEY `fk_state_country1_idx` (`country_id`),
-  CONSTRAINT `fk_state_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`)
+                         `state_id` int(11) NOT NULL,
+                         `state_name` varchar(22) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                         `country_id` int(11) NOT NULL,
+                         PRIMARY KEY (`state_id`),
+                         KEY `fk_state_country1_idx` (`country_id`),
+                         CONSTRAINT `fk_state_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -299,22 +299,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tour`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+SET character_set_client = utf8mb4 ;
 CREATE TABLE `tour` (
-  `date` date NOT NULL,
-  `venue` varchar(61) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `festival` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `latitude` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `longitude` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `tour` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `set_length` decimal(3,1) DEFAULT NULL,
-  `has_doodle` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `has_medley` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `event_id` int(11) NOT NULL AUTO_INCREMENT,
-  `city_id` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`event_id`),
-  KEY `fk_tour_city1_idx` (`city_id`),
-  CONSTRAINT `fk_tour_city1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`)
+                        `date` date NOT NULL,
+                        `venue` varchar(61) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+                        `festival` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+                        `latitude` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                        `longitude` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                        `tour` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+                        `set_length` decimal(3,1) DEFAULT NULL,
+                        `has_doodle` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                        `has_medley` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                        `event_id` int(11) NOT NULL AUTO_INCREMENT,
+                        `city_id` int(11) NOT NULL DEFAULT '1',
+                        PRIMARY KEY (`event_id`),
+                        KEY `fk_tour_city1_idx` (`city_id`),
+                        CONSTRAINT `fk_tour_city1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4891 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -392,15 +392,15 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CityCountry`(INOUT city VARCHAR(255))
+CREATE PROCEDURE `CityCountry`(INOUT city VARCHAR(255))
 BEGIN
-SELECT country_name 
+SELECT country_name
 INTO city
-FROM city JOIN state ON city.state_id = state.state_id JOIN country ON state.country_id = country.country_id 
+FROM city JOIN state ON city.state_id = state.state_id JOIN country ON state.country_id = country.country_id
 WHERE city_name = city;
 END ;;
 DELIMITER ;
@@ -419,9 +419,9 @@ DELIMITER ;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
 /*!50001 SET character_set_client      = utf8mb4 */;
 /*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+
 /*!50001 VIEW `istanbul_concerts` AS select `tour`.`date` AS `date`,`tour`.`venue` AS `venue`,`tour`.`festival` AS `festival`,`tour`.`latitude` AS `latitude`,`tour`.`longitude` AS `longitude`,`tour`.`tour` AS `tour`,`tour`.`set_length` AS `set_length`,`tour`.`has_doodle` AS `has_doodle`,`tour`.`has_medley` AS `has_medley`,`tour`.`event_id` AS `event_id`,`city`.`city_id` AS `city_id`,`city`.`city_name` AS `city_name` from (`tour` join `city` on((`tour`.`city_id` = `city`.`city_id`))) where (`city`.`city_name` = 'Istanbul') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
